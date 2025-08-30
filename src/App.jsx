@@ -6,7 +6,7 @@ import Skills from './pages/skills/Skills'
 function App() {
 
   return (
-    <div className="bg-gray-900">
+    <div className="bg-slate-950">
       <Home />
       <Skills />
     </div>

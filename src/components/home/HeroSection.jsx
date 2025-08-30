@@ -5,36 +5,42 @@ import { HiOutlineMail } from 'react-icons/hi'
 import { MdOutlineFileDownload } from 'react-icons/md'
 import { IoArrowForward } from 'react-icons/io5'
 import { motion } from "motion/react"
+import { PiShootingStarThin } from 'react-icons/pi'
+import { BiBold } from 'react-icons/bi'
 
 function HeroSection() {
     return (
-        <section className='flex flex-col gap-8 text-center my-10'>
+        <section className='flex flex-col gap-6 items-center text-center'>
+            <div className='flex items-center py-2 px-3.5 gap-2.5 rounded-full bg-slate-900 cursor-pointer hover:scale-105 transition-all duration-300'>
+                <PiShootingStarThin size={20} color='yellow'/>
+                <p className='text-sm'>Available for Freelance Projects</p>
+            </div>
             <div>
-                <h1 className='text-8xl font-bold'>Full Stack</h1>
-                <h1 className='text-8xl font-bold text-pink-300'>Developer</h1>
+                <h1 className='text-6xl sm:text-8xl font-bold py-1'>Full Stack</h1>
+                <h1 className='text-6xl sm:text-8xl font-bold bg-gradient-to-br from-sky-600 to-pink-600 bg-clip-text text-transparent hover:scale-105 transition-all duration-300'>Developer</h1>
             </div>
 
             <div>
-                <p className='text-3xl text-slate-300'>
+                <p className='sm:text-3xl text-2xl px-12 font-light text-slate-300 leading-10'>
                     Web Development • Testing Automation • UI/UX Design • Freelancing
                 </p>
             </div>
 
             <div className='px-6 md:px-24 lg:px-48 xl:px-96'>
-                <p className='text-xl text-slate-400'>
+                <p className='text-xl text-slate-400 leading-8'>
                     Crafting exceptional digital experiences through code, design, and comprehensive testing. Available for freelance projects and long-term collaborations.
                 </p>
             </div>
 
-            <div className='flex justify-center gap-8 mt-8'>
-                <div className='flex items-center justify-center gap-3 shadow rounded-2xl w-56 h-11 hover:border border-pink-500 bg-pink-500 hover:bg-transparent hover:text-pink-500 text-slate-300 transition-all duration-300'>
+            <div className='flex flex-col sm:flex-row justify-center gap-8 mt-8'>
+                <div className='flex items-center justify-center gap-3 shadow rounded-2xl w-56 h-11 hover:border border-pink-500 bg-gradient-to-r from-sky-600 to-pink-500 hover:bg-transparent hover:text-pink-500 text-slate-300 transition-all duration-300'>
                     <Buttons
                         name="View My Work"
                     />
                     <IoArrowForward />
                 </div>
 
-                <div className='flex items-center justify-center gap-3 shadow rounded-2xl w-56 h-11 border bg-transparent hover:bg-pink-500 hover:text-slate-300 text-pink-500 transition-all duration-300'>
+                <div className='flex items-center justify-center gap-3 shadow rounded-2xl w-56 h-11 border bg-transparent hover:bg-gradient-to-r from-sky-600 to-pink-500 hover:text-slate-300 text-pink-500 transition-all duration-300'>
                     <MdOutlineFileDownload />
                     <Buttons
                         name="Download CV"

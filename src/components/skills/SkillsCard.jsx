@@ -2,7 +2,7 @@ import React from 'react'
 
 function SkillsCard({ name }) {
   return (
-    <div className='flex flex-col items-center w-full p-8 bg-slate-800 rounded-lg shadow-lg gap-8 text-slate-200'>
+    <div className='flex flex-col items-center w-full p-8 bg-slate-950 rounded-lg shadow-lg gap-8 text-slate-200 hover:shadow-gray-900'>
         <div className='w-full flex gap-8 items-center'>
           <div className='w-14 h-14 bg-emerald-600 rounded-xl flex items-center justify-center'>
             <p>logo</p>
