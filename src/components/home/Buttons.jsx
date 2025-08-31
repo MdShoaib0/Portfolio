@@ -1,10 +1,10 @@
 import React from 'react'
 
-function Buttons({ name, color = '', bgColor = '', border = '' }) {
+function Buttons({ name }) {
   return (
     <button
       type="button"
-      className={`font-semibold text-lg ${color} ${bgColor} ${border} hover:scale-105 transition-all duration-300 active:scale-95`}
+      className={`font-medium`}
     >
       {name}
     </button>

@@ -11,7 +11,7 @@ import { BiBold } from 'react-icons/bi'
 function HeroSection() {
     return (
         <section className='flex flex-col gap-6 items-center text-center'>
-            <div className='flex items-center py-2 px-3.5 gap-2.5 rounded-full bg-slate-900 cursor-pointer hover:scale-105 transition-all duration-300'>
+            <div className='flex items-center py-2 px-3.5 gap-2.5 rounded-full bg-gradient-to-r from-slate-600 to-slate-300 shadow shadow-black cursor-pointer hover:scale-105 transition-all duration-300'>
                 <PiShootingStarThin size={20} color='yellow'/>
                 <p className='text-sm'>Available for Freelance Projects</p>
             </div>
@@ -21,26 +21,26 @@ function HeroSection() {
             </div>
 
             <div>
-                <p className='sm:text-3xl text-2xl px-12 font-light text-slate-300 leading-10'>
+                <p className='sm:text-3xl text-2xl px-12 font-light text-slate-700 leading-10'>
                     Web Development • Testing Automation • UI/UX Design • Freelancing
                 </p>
             </div>
 
             <div className='px-6 md:px-24 lg:px-48 xl:px-96'>
-                <p className='text-xl text-slate-400 leading-8'>
+                <p className='text-xl text-slate-500 leading-8'>
                     Crafting exceptional digital experiences through code, design, and comprehensive testing. Available for freelance projects and long-term collaborations.
                 </p>
             </div>
 
             <div className='flex flex-col sm:flex-row justify-center gap-8 mt-8'>
-                <div className='flex items-center justify-center gap-3 shadow rounded-2xl w-56 h-11 hover:border border-pink-500 bg-gradient-to-r from-sky-600 to-pink-500 hover:bg-transparent hover:text-pink-500 text-slate-300 transition-all duration-300'>
+                <div className='flex items-center justify-center hover:border hover:border-pink-600 gap-3 shadow rounded-2xl w-56 h-12 bg-gradient-to-r from-sky-800 to-pink-800  hover:bg-none transition-all duration-300 hover:scale-105 active:scale-95'>
                     <Buttons
                         name="View My Work"
                     />
                     <IoArrowForward />
                 </div>
 
-                <div className='flex items-center justify-center gap-3 shadow rounded-2xl w-56 h-11 border bg-transparent hover:bg-gradient-to-r from-sky-600 to-pink-500 hover:text-slate-300 text-pink-500 transition-all duration-300'>
+                <div className='flex items-center justify-center gap-3 shadow rounded-2xl w-56 h-12 border bg-transparent hover:bg-gradient-to-r from-sky-600 to-pink-500 hover:text-slate-200 text-pink-500 transition-all duration-300'>
                     <MdOutlineFileDownload />
                     <Buttons
                         name="Download CV"
