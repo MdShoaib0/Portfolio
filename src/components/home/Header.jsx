@@ -11,12 +11,12 @@ const navItems = [
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const navItemClass =
-    "cursor-pointer hover:text-pink-400 hover:scale-105 transition-all duration-300 active:scale-95";
+    "cursor-pointer hover:bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-clip-text hover:text-transparent hover:scale-105 transition-all duration-300 active:scale-95 text-slate-900";
 
   return (
     <nav className="w-full">
       <ul className="hidden md:flex justify-end gap-16 font-bold px-10 py-8 items-center">
-        <li className="mr-auto text-3xl font-bold cursor-pointer hover:scale-105 transition-all duration-300 active:scale-95 bg-gradient-to-r from-sky-600 to-pink-500 bg-clip-text text-transparent">
+        <li className="mr-auto text-3xl font-bold cursor-pointer hover:scale-105 transition-all duration-300 active:scale-95 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
           Shoaib's Portfolio
         </li>
         {navItems.map((item) => (
@@ -27,9 +27,9 @@ function Header() {
       </ul>
       {/* Mobile Menu Button */}
       <div className="md:hidden flex justify-between items-center px-6 py-8">
-        <span className="text-3xl font-bold bg-gradient-to-r from-sky-600 to-pink-600 bg-clip-text text-transparent">Shoaib's Portfolio</span>
+        <span className="text-3xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Shoaib's Portfolio</span>
         <button
-          className="text-pink-500 focus:outline-none"
+          className="text-purple-500 focus:outline-none"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle navigation"
         >

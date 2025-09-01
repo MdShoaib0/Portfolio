@@ -10,7 +10,7 @@ function SkillsCard({ name }) {
               <LuDatabase size={29} color='white' />
             </div>
           </div>
-          <p className='text-2xl font-medium'>{name}</p>
+          <p className='text-2xl font-semibold'>{name}</p>
         </div>
 
         <div className='w-full grid grid-cols-2 text-sm font-medium text-gray-700 gap-4 text-center'>
