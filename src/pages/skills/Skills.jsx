@@ -23,7 +23,7 @@ function Skills() {
         <p className='text-xl leading-9 text-slate-800'>A comprehensive toolkit built through years of experience and continuous learning</p>
       </div>
 
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-24 mx-6 sm:mx-10'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-20 mx-6 sm:mx-10'>
         {skills.map(skill => (
           <SkillsCard key={skill.name} name={skill.name} />
         ))}

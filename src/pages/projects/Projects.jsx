@@ -1,5 +1,6 @@
 import { Star } from 'lucide-react'
 import React from 'react'
+import ProjectCard from '../../components/project/ProjectCard'
 
 function Projects() {
   return (
@@ -20,8 +21,13 @@ function Projects() {
             <p className='px-8 py-2 rounded-full border border-slate-300'>Desing</p>
           </div>
     
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-24 mx-6 sm:mx-10'>
-            
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-10 mx-6 sm:mx-10'>
+            <ProjectCard />
+            <ProjectCard />
+            <ProjectCard />
+            <ProjectCard />
+            <ProjectCard />
+            <ProjectCard />
           </div>
         </section>
   )
