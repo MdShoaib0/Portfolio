@@ -13,6 +13,8 @@ import ProjectCard from "./components/ProjectCard";
 import ContactForm from "./components/ContactForm";
 import ContactDetail from "./components/ContactDetails";
 import { FaRegStar } from "react-icons/fa";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 
 // git remote add origin https://github.com/MdShoaib0/Portfolio.git
@@ -181,6 +183,13 @@ function App() {
     },
   ];
 
+  useGSAP(() => {
+    gsap.fromTo('#outerLine, #innerLine',
+      { y: -10 },
+      { y: 10, duration: 1.5, ease: "sine.inOut", repeat: -1, yoyo: true }
+    );
+  });
+
   return (
     <>
       {/* Header */}
@@ -306,8 +315,8 @@ function App() {
               <MdOutlineMail size={28} className="text-slate-700" />
             </a>
 
-            <div className="w-10 h-16 border-2 border-purple-600 rounded-full flex items-center justify-center absolute top-12 animate-bounce">
-              <div className="w-2.5 h-4 bg-gradient-to-b from-pink-300 to-pink-500 rounded-full"></div>
+            <div id="outerLine" className="w-10 h-16 border-2 border-purple-600 rounded-full flex items-center justify-center absolute top-12">
+              <div id="innerLine" className="w-2.5 h-4 bg-gradient-to-b from-pink-300 to-pink-500 rounded-full"></div>
             </div>
           </div>
         </div>
@@ -356,8 +365,8 @@ function App() {
               key={cat}
               onClick={() => setActiveCategory(cat)}
               className={`px-8 py-2 rounded-full border transition-colors duration-300 ${activeCategory === cat
-                  ? "text-white bg-gradient-to-r from-purple-500 to-pink-500 border-none"
-                  : "hover:bg-purple-100"
+                ? "text-white bg-gradient-to-r from-purple-500 to-pink-500 border-none"
+                : "hover:bg-purple-100"
                 }`}
             >
               {cat}
