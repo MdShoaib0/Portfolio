@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { PiShootingStarThin } from "react-icons/pi";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
 import { IoArrowForward } from "react-icons/io5";
@@ -16,6 +16,7 @@ import ContactDetail from "./components/ContactDetails";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import Lenis from '@studio-freight/lenis';
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -151,23 +152,40 @@ function App() {
       ? projects
       : projects.filter((p) => p.type === activeCategory);
 
-  // GSAP Animation
   useGSAP(() => {
-
-    gsap.from('#navigations', {
-      y: 20,
-      opacity: 0,
-      duration: 0.7,
-      stagger: 0.1,
-      ease: 'sine',
-    })
-
     gsap.fromTo(
       "#outerLine, #innerLine",
       { y: -15 },
       { y: 15, duration: 1.5, ease: "sine.inOut", repeat: -1, yoyo: true }
     );
-  });
+
+    gsap.from("#navigations", {
+      y: 20,
+      opacity: 0,
+      duration: 0.7,
+      stagger: 0.1,
+      ease: "sine",
+    });
+  }, []);
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 3,
+      smoothWheel: true,
+      smoothTouch: true, // ✅ Ensures smooth scrolling on touch devices
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
 
   return (
     <>
@@ -220,13 +238,12 @@ function App() {
           </div>
 
           <ul
+            id="menu"
             ref={mobileMenuRef}
-            className={`w-full absolute top-full left-0 rounded-b-3xl bg-gradient-to-b from-white to-emerald-50 flex flex-col items-center gap-1 font-bold py-4 text-pink-600 shadow-2xl md:hidden origin-top z-50 transition-opacity duration-300 ${
-              menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-            }`}
+            className={`w-full absolute top-full left-0 rounded-b-3xl bg-gradient-to-b from-white to-emerald-50 flex flex-col items-center gap-1 font-bold py-4 text-pink-600 shadow-2xl md:hidden origin-top z-50 ${!menuOpen ? 'hidden' : 'flex'}`}
           >
             {navItems.map(({ label, path }) => (
-              <li key={label} className="py-2 px-4 rounded-lg hover:bg-purple-50 w-full text-center">
+              <li id="mobileList" key={label} className="py-2 px-4 rounded-lg hover:bg-purple-50 w-full text-center">
                 <a href={path} onClick={(e) => handleScroll(e, path)} className="block w-full">
                   {label}
                 </a>
@@ -325,11 +342,10 @@ function App() {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-8 py-2 rounded-full border transition-colors duration-300 ${
-                activeCategory === cat
-                  ? "text-white bg-gradient-to-r from-purple-500 to-pink-500 border-none"
-                  : "hover:bg-purple-100"
-              }`}
+              className={`px-8 py-2 rounded-full border transition-colors duration-300 ${activeCategory === cat
+                ? "text-white bg-gradient-to-r from-purple-500 to-pink-500 border-none"
+                : "hover:bg-purple-100"
+                }`}
             >
               {cat}
             </button>
