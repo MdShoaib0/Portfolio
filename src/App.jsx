@@ -152,27 +152,46 @@ function App() {
       ? projects
       : projects.filter((p) => p.type === activeCategory);
 
-  useGSAP(() => {
-    gsap.fromTo(
-      "#outerLine, #innerLine",
-      { y: -15 },
-      { y: 15, duration: 1.5, ease: "sine.inOut", repeat: -1, yoyo: true }
-    );
+    useGSAP(() => {
+  const tl = gsap.timeline({ defaults: { ease: 'power2.inOut' } });
 
-    gsap.from("#navigations", {
-      y: 20,
-      opacity: 0,
-      duration: 0.7,
-      stagger: 0.1,
-      ease: "sine",
-    });
-  }, []);
+  if (menuOpen) {
+    // Timeline for opening menu
+    tl.fromTo(
+      mobileMenuRef.current,
+      { y: -300, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, display: 'flex' }
+    )
+    .fromTo(
+      '#navigations_2',
+      { y: -50, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.7, stagger: 0.1 },
+      "-=0.3" // starts 0.5s before previous animation ends (overlap)
+    );
+  } else {
+    // Timeline for closing menu
+    tl.fromTo(
+      mobileMenuRef.current,
+      { y: 0, opacity: 1 },
+      { y: -300, opacity: 0, display: 'none', duration: 1 }
+    );
+    // If you want to animate navigations on close, you can uncomment this:
+    tl.fromTo(
+      '#navigations_2',
+      { y: 0, opacity: 1 },
+      { y: -50, opacity: 0, duration: 0.7, stagger: 0.1 },
+      "-=0.3" // starts 0.5s before previous animation ends (overlap)
+    );
+  }
+
+}, [menuOpen]);
+  
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 3,
+      duration: 2.5,
       smoothWheel: true,
-      smoothTouch: true, // ✅ Ensures smooth scrolling on touch devices
+      smoothTouch: true,
     });
 
     function raf(time) {
@@ -238,12 +257,12 @@ function App() {
           </div>
 
           <ul
-            id="menu"
+            // id="navi"
             ref={mobileMenuRef}
-            className={`w-full absolute top-full left-0 rounded-b-3xl bg-gradient-to-b from-white to-emerald-50 flex flex-col items-center gap-1 font-bold py-4 text-pink-600 shadow-2xl md:hidden origin-top z-50 ${!menuOpen ? 'hidden' : 'flex'}`}
+            className={`w-full absolute top-full left-0 rounded-b-3xl bg-gradient-to-b from-white to-emerald-50 hidden flex-col items-center gap-1 font-bold py-4 text-pink-600 shadow-2xl md:hidden origin-top z-50`}
           >
             {navItems.map(({ label, path }) => (
-              <li id="mobileList" key={label} className="py-2 px-4 rounded-lg hover:bg-purple-50 w-full text-center">
+              <li id="navigations_2" key={label} className="py-2 px-4 rounded-lg hover:bg-purple-50 w-full text-center">
                 <a href={path} onClick={(e) => handleScroll(e, path)} className="block w-full">
                   {label}
                 </a>
