@@ -164,9 +164,9 @@ function App() {
     )
     .fromTo(
       '#navigations_2',
-      { y: -50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.7, stagger: 0.1 },
-      "-=0.3" // starts 0.5s before previous animation ends (overlap)
+      { y: -35, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.7, stagger: 0.07 },
+      "-=0.8" // starts 0.5s before previous animation ends (overlap)
     );
   } else {
     // Timeline for closing menu
@@ -179,8 +179,8 @@ function App() {
     tl.fromTo(
       '#navigations_2',
       { y: 0, opacity: 1 },
-      { y: -50, opacity: 0, duration: 0.7, stagger: 0.1 },
-      "-=0.3" // starts 0.5s before previous animation ends (overlap)
+      { y: -50, opacity: 0, duration: 0.7, stagger: 0.05 },
+      "-=1.25" // starts 0.5s before previous animation ends (overlap)
     );
   }
 
