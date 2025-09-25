@@ -16,7 +16,7 @@ import ContactDetail from "./components/ContactDetails";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import Lenis from '@studio-freight/lenis';
+import { ReactLenis } from 'lenis/react'
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -152,61 +152,49 @@ function App() {
       ? projects
       : projects.filter((p) => p.type === activeCategory);
 
-    useGSAP(() => {
-  const tl = gsap.timeline({ defaults: { ease: 'power2.inOut' } });
+  useGSAP(() => {
+    const tl = gsap.timeline({ defaults: { ease: 'power2.inOut' } });
 
-  if (menuOpen) {
-    // Timeline for opening menu
-    tl.fromTo(
-      mobileMenuRef.current,
-      { y: -300, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, display: 'flex' }
-    )
-    .fromTo(
-      '#navigations_2',
-      { y: -35, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.7, stagger: 0.07 },
-      "-=0.8" // starts 0.5s before previous animation ends (overlap)
-    );
-  } else {
-    // Timeline for closing menu
-    tl.fromTo(
-      mobileMenuRef.current,
-      { y: 0, opacity: 1 },
-      { y: -300, opacity: 0, display: 'none', duration: 1 }
-    );
-    tl.fromTo(
-      '#navigations_2',
-      { y: 0, opacity: 1 },
-      { y: -50, opacity: 0, duration: 0.7, stagger: 0.05 },
-      "-=1.1"
-    );
-  }
-
-}, [menuOpen]);
-  
-
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 2.5,
-      smoothWheel: true,
-      smoothTouch: true,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+    if (menuOpen) {
+      // Timeline for opening menu
+      tl.fromTo(
+        mobileMenuRef.current,
+        { y: -300, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, display: 'flex' }
+      )
+        .fromTo(
+          '#navigations_2',
+          { y: -35, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7, stagger: 0.07 },
+          "-=0.8" // starts 0.5s before previous animation ends (overlap)
+        );
+    } else {
+      // Timeline for closing menu
+      tl.fromTo(
+        mobileMenuRef.current,
+        { y: 0, opacity: 1 },
+        { y: -300, opacity: 0, display: 'none', duration: 1 }
+      );
+      tl.fromTo(
+        '#navigations_2',
+        { y: 0, opacity: 1 },
+        { y: -50, opacity: 0, duration: 0.7, stagger: 0.05 },
+        "-=1.1"
+      );
     }
-    requestAnimationFrame(raf);
 
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
-
+  }, [menuOpen]);
 
   return (
     <>
+      <ReactLenis root options={{
+        autoRaf: true,
+        duration: 1.8,           // thoda longer duration
+        easing: (t) => t * (2 - t), // quadratic ease-out
+        smoothWheel: true,
+        smoothTouch: true,
+        touchMultiplier: 10,
+      }} />
       {/* Header */}
       <header className="w-full h-20 flex items-center fixed top-0 left-0 bg-white z-50">
         <nav className="w-full" role="navigation">
