@@ -175,12 +175,11 @@ function App() {
       { y: 0, opacity: 1 },
       { y: -300, opacity: 0, display: 'none', duration: 1 }
     );
-    // If you want to animate navigations on close, you can uncomment this:
     tl.fromTo(
       '#navigations_2',
       { y: 0, opacity: 1 },
       { y: -50, opacity: 0, duration: 0.7, stagger: 0.05 },
-      "-=1.25" // starts 0.5s before previous animation ends (overlap)
+      "-=1.1"
     );
   }
 
