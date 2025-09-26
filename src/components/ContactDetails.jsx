@@ -37,8 +37,8 @@ function ContactDetail() {
   return (
     <section className="flex flex-col gap-8">
       {/* Heading */}
-      <h2 className="text-3xl font-bold">Let&apos;s Work Together</h2>
-      <p className="text-slate-600 text-lg">
+      <h2 className="text-3xl font-bold text-slate-200">Let&apos;s Work Together</h2>
+      <p className="text-slate-500 text-lg">
         I&apos;m always excited about new opportunities and interesting projects.
         Whether you have a specific idea in mind or need guidance on your next
         digital venture, I&apos;d love to hear from you.
@@ -52,7 +52,7 @@ function ContactDetail() {
               <Icon color="white" size={30} />
             </div>
             <div className="flex flex-col">
-              <span className="text-gray-600 font-medium">{label}</span>
+              <span className="text-gray-300 font-medium">{label}</span>
               <a
                 href={href}
                 className="text-lg font-medium text-blue-700 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"

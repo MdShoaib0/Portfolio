@@ -153,32 +153,58 @@ function App() {
       : projects.filter((p) => p.type === activeCategory);
 
   useGSAP(() => {
+
+    gsap.fromTo('#outerLine, #innerLine', {
+      y: -20
+    }, {
+      y: 10,
+      duration: 1.3,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    })
+
     const tl = gsap.timeline({ defaults: { ease: 'power2.inOut' } });
+
+    tl.from('#navigations', {
+      y: -20,
+      opacity: 0,
+      rotate: 180,
+      duration: 0.7,
+      stagger: 0.07,
+    }, 'navBar')
+
+    tl.from('#navigations-1', {
+      y: -20,
+      rotate: 180,
+      duration: 0.7,
+      opacity: 0,
+    }, 'navBar')
 
     if (menuOpen) {
       // Timeline for opening menu
       tl.fromTo(
         mobileMenuRef.current,
-        { y: -300, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, display: 'flex' }
+        { xPercent: 50, opacity: 0 },
+        { xPercent: 0, opacity: 1, duration: 1, display: 'flex' }
       )
         .fromTo(
           '#navigations_2',
-          { y: -35, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.7, stagger: 0.07 },
+          { xPercent: 50, opacity: 0 },
+          { xPercent: 0, opacity: 1, duration: 0.7, stagger: 0.07 },
           "-=0.8" // starts 0.5s before previous animation ends (overlap)
         );
     } else {
       // Timeline for closing menu
       tl.fromTo(
         mobileMenuRef.current,
-        { y: 0, opacity: 1 },
-        { y: -300, opacity: 0, display: 'none', duration: 1 }
+        { xPercent: 0, opacity: 1 },
+        { xPercent: 50, opacity: 0, display: 'none', duration: 1 }
       );
       tl.fromTo(
         '#navigations_2',
-        { y: 0, opacity: 1 },
-        { y: -50, opacity: 0, duration: 0.7, stagger: 0.05 },
+        { xPercent: 0, opacity: 1 },
+        { xPercent: 50, opacity: 0, duration: 0.7, stagger: 0.05 },
         "-=1.1"
       );
     }
@@ -189,18 +215,18 @@ function App() {
     <>
       <ReactLenis root options={{
         autoRaf: true,
-        duration: 1.8,           // thoda longer duration
+        duration: 1.5,           // thoda longer duration
         easing: (t) => t * (2 - t), // quadratic ease-out
         smoothWheel: true,
         smoothTouch: true,
-        touchMultiplier: 10,
+        touchMultiplier: 1.5,
       }} />
       {/* Header */}
-      <header className="w-full h-20 flex items-center fixed top-0 left-0 bg-white z-50">
+      <header className="w-full h-20 flex items-center fixed top-0 left-0 bg-slate-950 z-50">
         <nav className="w-full" role="navigation">
           {/* Desktop Navigation */}
           <ul className="hidden md:flex justify-end gap-10 font-bold px-10 py-6 items-center w-full">
-            <li id="navigations" className="mr-auto text-3xl font-bold cursor-pointer bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <li id="navigations-1" className="mr-auto text-3xl font-bold cursor-pointer bg-gradient-to-r from-purple-700 to-purple-500 bg-clip-text text-transparent">
               <a href="#home" onClick={(e) => handleScroll(e, "#home")}>
                 Shoaib's Portfolio
               </a>
@@ -210,7 +236,7 @@ function App() {
                 <a
                   href={path}
                   onClick={(e) => handleScroll(e, path)}
-                  className="text-pink-600"
+                  className="text-purple-500"
                 >
                   {label}
                 </a>
@@ -220,7 +246,7 @@ function App() {
 
           {/* Mobile Navigation */}
           <div className="md:hidden flex justify-between items-center px-6 py-5 w-full">
-            <span className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-gradient-to-r from-purple-700 to-purple-500 bg-clip-text text-transparent">
               <a href="#home" onClick={(e) => handleScroll(e, "#home")}>
                 Shoaib's Portfolio
               </a>
@@ -246,10 +272,10 @@ function App() {
           <ul
             // id="navi"
             ref={mobileMenuRef}
-            className={`w-full absolute top-full left-0 rounded-b-3xl bg-gradient-to-b from-white to-emerald-50 hidden flex-col items-center gap-1 font-bold py-4 text-pink-600 shadow-2xl md:hidden origin-top z-50`}
+            className={`w-full h-screen absolute top-full left-0 rounded-b-3xl backdrop-blur-lg px-4 bg-slate-950/15 hidden flex-col gap-1 font-bold py-4 text-slate-300 shadow-2xl md:hidden origin-top z-50`}
           >
             {navItems.map(({ label, path }) => (
-              <li id="navigations_2" key={label} className="py-2 px-4 rounded-lg hover:bg-purple-50 w-full text-center">
+              <li id="navigations_2" key={label} className="py-2 px-4 rounded-lg hover:bg-purple-50 w-full font-bold">
                 <a href={path} onClick={(e) => handleScroll(e, path)} className="block w-full">
                   {label}
                 </a>
@@ -262,29 +288,29 @@ function App() {
       {/* Hero Section */}
       <section id="home" className="min-h-screen flex items-center justify-center">
         <div className="flex flex-col gap-6 items-center text-center mt-10">
-          <div id="free" className="flex items-center py-2 mt-4 px-3.5 gap-2.5 rounded-full bg-gradient-to-r from-emerald-300 to-emerald-200 shadow font-medium cursor-pointer hover:scale-105 transition-duration duration-300">
-            <PiShootingStarThin size={21} color="orange" />
-            <p className="text-sm text-slate-700">Available for Freelance Projects</p>
+          <div id="free" className="flex items-center py-2 mt-4 px-3.5 gap-2.5 rounded-full bg-gradient-to-r from-purple-600 to-purple-400 shadow font-medium cursor-pointer hover:scale-105 transition-duration duration-300">
+            <PiShootingStarThin size={21} />
+            <p className="text-sm text-slate-300">Available for Freelance Projects</p>
           </div>
 
-          <h1 className="text-6xl sm:text-8xl font-bold py-1 text-slate-900">Full Stack</h1>
-          <h1 className="text-6xl sm:text-8xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent hover:scale-105 transition-all duration-300">
+          <h1 className="text-6xl sm:text-8xl font-bold py-1 text-slate-200">Full Stack</h1>
+          <h1 className="text-6xl sm:text-8xl font-bold bg-gradient-to-r from-purple-700 to-purple-500 bg-clip-text text-transparent hover:scale-105 transition-all duration-300">
             Developer
           </h1>
 
-          <p className="sm:text-3xl text-2xl px-12 font-light text-slate-950 leading-10">
+          <p className="sm:text-3xl text-2xl px-12 font-light text-slate-400 leading-10">
             Web Development • Testing Automation • UI/UX Design • Freelancing
           </p>
 
-          <p className="px-6 md:px-24 lg:px-48 xl:px-96 text-xl text-slate-800 leading-8">
+          <p className="px-6 md:px-24 lg:px-48 xl:px-96 text-xl text-slate-500 leading-8">
             Crafting exceptional digital experiences through code, design, and testing.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-8 mt-8">
-            <button className="flex items-center justify-center text-white hover:text-black hover:border hover:border-pink-600 gap-3 shadow rounded-2xl w-56 h-12 bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-none transition-all duration-300 hover:scale-105 active:scale-95">
+            <button className="flex items-center justify-center text-white hover:text-slate-300 hover:border hover:border-purple-600 gap-3 shadow rounded-2xl w-56 h-12 bg-gradient-to-r from-purple-700 to-purple-500 hover:bg-none transition-all duration-300 hover:scale-105 active:scale-95">
               View My Work <IoArrowForward />
             </button>
-            <button className="flex items-center justify-center gap-3 shadow rounded-2xl w-56 h-12 border bg-transparent hover:bg-gradient-to-r from-purple-500 to-pink-500 hover:text-slate-200 text-pink-500 transition-all duration-300 hover:scale-105 active:scale-95">
+            <button className="flex items-center justify-center gap-3 shadow rounded-2xl w-56 h-12 border bg-transparent hover:bg-gradient-to-r from-purple-700 to-purple-500 hover:text-slate-200 text-purple-500 transition-all duration-300 hover:scale-105 active:scale-95">
               <MdOutlineFileDownload /> Download CV
             </button>
           </div>
@@ -303,7 +329,7 @@ function App() {
 
             {/* Scroll Animation Indicator */}
             <div id="outerLine" className="w-10 h-16 border-2 border-purple-600 rounded-full flex items-center justify-center absolute top-12">
-              <div id="innerLine" className="w-2.5 h-4 bg-gradient-to-b from-pink-300 to-pink-500 rounded-full"></div>
+              <div id="innerLine" className="w-2.5 h-4 bg-gradient-to-b from-blue-300 to-blue-500 rounded-full"></div>
             </div>
           </div>
         </div>
@@ -312,14 +338,14 @@ function App() {
       {/* Skills Section */}
       <section id="skill" className="flex flex-col">
         <div className="flex flex-col gap-6 justify-center items-center text-center mt-28 px-6">
-          <div className="flex items-center gap-2 py-2.5 px-5 text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-medium shadow">
+          <div className="flex items-center gap-2 py-2.5 px-5 text-white bg-gradient-to-r from-purple-700 to-purple-500 rounded-full font-medium shadow">
             <RiFlashlightLine size={20} />
             <p>Expertise</p>
           </div>
-          <h2 className="text-5xl sm:text-6xl font-bold leading-tight text-slate-950">
-            Skills & <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Expertise</span>
+          <h2 className="text-5xl sm:text-6xl font-bold leading-tight text-slate-200">
+            Skills & <span className="bg-gradient-to-r from-purple-700 to-purple-500 bg-clip-text text-transparent">Expertise</span>
           </h2>
-          <p className="text-lg sm:text-xl leading-8 text-slate-800 max-w-2xl">
+          <p className="text-lg sm:text-xl leading-8 text-slate-400 max-w-2xl">
             A comprehensive toolkit built through years of experience.
           </p>
         </div>
@@ -334,22 +360,22 @@ function App() {
       {/* Projects Section */}
       <section id="project" className="flex flex-col">
         <div className="flex flex-col gap-8 justify-center items-center text-center mt-28 px-6">
-          <div className="flex items-center justify-center gap-1.5 py-2.5 my-1 px-5 text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-medium">
+          <div className="flex items-center justify-center gap-1.5 py-2.5 my-1 px-5 text-white bg-gradient-to-r from-purple-700 to-purple-500 rounded-full font-medium">
             <FaRegStar size={19} />
             <p>Portfolio</p>
           </div>
-          <h2 className="sm:text-6xl text-5xl font-bold leading-tight text-slate-950">
-            Featured <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Projects</span>
+          <h2 className="sm:text-6xl text-5xl font-bold leading-tight text-slate-200">
+            Featured <span className="bg-gradient-to-r from-purple-700 to-purple-500 bg-clip-text text-transparent">Projects</span>
           </h2>
         </div>
 
-        <div className="flex justify-center gap-4 flex-wrap font-medium text-sm py-12 px-8 text-slate-700">
+        <div className="flex justify-center gap-4 flex-wrap font-medium text-sm py-12 px-8 text-slate-400">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
               className={`px-8 py-2 rounded-full border transition-colors duration-300 ${activeCategory === cat
-                ? "text-white bg-gradient-to-r from-purple-500 to-pink-500 border-none"
+                ? "text-white bg-gradient-to-r from-purple-700 to-purple-500 border-none"
                 : "hover:bg-purple-100"
                 }`}
             >
@@ -368,12 +394,12 @@ function App() {
       {/* Services Section */}
       <section id="service" className="flex flex-col">
         <div className="flex flex-col gap-8 justify-center items-center text-center mt-28 px-6">
-          <div className="flex items-center gap-2 py-2.5 px-5 text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-medium shadow">
+          <div className="flex items-center gap-2 py-2.5 px-5 text-white bg-gradient-to-r from-purple-700 to-purple-500 rounded-full font-medium shadow">
             <RiFlashlightLine size={20} />
             <p>Services</p>
           </div>
-          <h2 className="text-5xl sm:text-6xl font-bold leading-tight text-slate-950">
-            What I <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Offer</span>
+          <h2 className="text-5xl sm:text-6xl font-bold leading-tight text-slate-200">
+            What I <span className="bg-gradient-to-r from-purple-700 to-purple-500 bg-clip-text text-transparent">Offer</span>
           </h2>
         </div>
 
@@ -387,8 +413,8 @@ function App() {
       {/* Contact Section */}
       <section id="contact" className="flex flex-col mt-28 mb-20 px-6">
         <div className="flex flex-col gap-6 justify-center items-center text-center mb-10">
-          <h2 className="text-5xl sm:text-6xl font-bold leading-tight text-slate-950">
-            Get in <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Touch</span>
+          <h2 className="text-5xl sm:text-6xl font-bold leading-tight text-slate-200">
+            Get in <span className="bg-gradient-to-r from-purple-700 to-purple-500 bg-clip-text text-transparent">Touch</span>
           </h2>
         </div>
 
@@ -399,9 +425,9 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="w-full flex flex-col py-20 px-8 text-center justify-center items-center bg-gradient-to-r gap-8 from-blue-950 to-blue-900">
-        <p className="text-3xl font-bold text-white">DevPortfolio</p>
-        <p className="text-sm font-medium text-gray-50">
+      <footer className="w-full flex flex-col py-10 px-8 text-center justify-center items-center bg-gradient-to-r gap-8 from-slate-800 to-slate-950">
+        <p className="text-3xl font-bold text-slate-200">DevPortfolio</p>
+        <p className="text-sm font-medium text-gray-200">
           Crafting exceptional digital experiences with passion and precision
         </p>
 

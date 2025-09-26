@@ -73,11 +73,11 @@ function ContactForm() {
 
   return (
     <form
-      className="w-full flex flex-col gap-6 bg-white p-6 md:p-9 rounded-xl shadow-lg"
+      className="w-full flex flex-col gap-6 backdrop-blur-lg bg-purple-900/10 p-6 md:p-9 rounded-xl shadow-lg"
       onSubmit={handleSubmit}
       noValidate
     >
-      <p className="text-2xl font-bold text-gray-800">Send a Message</p>
+      <p className="text-2xl font-bold text-gray-200">Send a Message</p>
 
       {/* Name and Email */}
       <div className="flex flex-col md:flex-row gap-4">

@@ -12,7 +12,7 @@ function SkillsCard({ name }) {
   ]
 
   return (
-    <div className="flex flex-col items-center w-full p-6 bg-white rounded-2xl shadow-lg gap-6">
+    <div className="flex flex-col items-center w-full p-6 backdrop-blur-lg bg-white/15 rounded-2xl shadow-lg gap-6 hover:shadow-2xl hover:scale-105 transition-all duration-300">
       {/* Header with Icon and Title */}
       <div className="flex items-center gap-4 w-full">
         <div className="p-4 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-700 flex items-center justify-center">
@@ -22,11 +22,11 @@ function SkillsCard({ name }) {
       </div>
 
       {/* Skills Grid */}
-      <div className="grid grid-cols-2 w-full gap-3 text-sm font-medium text-gray-700 text-center">
+      <div className="grid grid-cols-2 w-full gap-3 text-sm font-medium text-gray-400 text-center">
         {skills.map((skill, idx) => (
           <p
             key={idx}
-            className="bg-emerald-100 rounded-full py-1.5 hover:bg-emerald-200 transition"
+            className="bg-slate-900 rounded-full py-1.5 hover:bg-slate-950 transition"
           >
             {skill}
           </p>

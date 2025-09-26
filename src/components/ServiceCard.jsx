@@ -11,14 +11,14 @@ function ServiceCard() {
   ]
 
   return (
-    <div className="flex flex-col w-full bg-white items-center p-8 gap-6 shadow-lg rounded-2xl">
+    <div className="flex flex-col w-full backdrop-blur-lg bg-white/15 items-center p-8 gap-6 shadow-lg rounded-2xl">
       {/* Icon */}
       <div className="w-[73px] h-[73px] flex justify-center items-center rounded-3xl shadow bg-gradient-to-r from-blue-500 to-purple-500 hover:scale-105 transition-transform">
         <HiOutlineCodeBracket size={28} className="text-white" />
       </div>
 
       {/* Title & Description */}
-      <p className="text-2xl font-bold text-center">Full-Stack Development</p>
+      <p className="text-2xl font-bold text-purple-600 text-center">Full-Stack Development</p>
       <p className="text-center font-medium text-gray-500">
         End-to-end web applications built with modern technologies and best
         practices for scalability and performance.
@@ -38,7 +38,7 @@ function ServiceCard() {
       </div>
 
       {/* Button */}
-      <button className="w-full py-2 flex justify-center items-center gap-2 border border-gray-300 rounded-2xl hover:bg-gray-50 transition-colors">
+      <button className="w-full py-2 flex justify-center items-center gap-2 border border-purple-600 text-purple-600 rounded-2xl hover:bg-gray-50 transition-colors">
         Learn More
         <LuArrowRight className="transition-transform group-hover:translate-x-1" />
       </button>
