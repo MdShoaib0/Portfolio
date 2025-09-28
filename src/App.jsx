@@ -168,30 +168,22 @@ function App() {
     const tl2 = gsap.timeline({ defaults: { ease: 'power2.inOut' } });
 
     tl2.from('#navigations', {
-      y: -20,
+      y: -25,
       opacity: 0,
-      rotate: 180,
-      duration: 0.7,
-      stagger: 0.07,
-    }, 'navBar')
-
-    tl2.from('#navigations-1', {
-      y: -20,
-      rotate: 180,
-      duration: 0.7,
-      opacity: 0,
+      duration: 0.5,
+      stagger: 0.1,
     }, 'navBar')
 
     if (menuOpen) {
       // Timeline for opening menu
       tl.fromTo(
         mobileMenuRef.current,
-        { xPercent: 50, opacity: 0 },
+        { xPercent: 100, opacity: 0 },
         { xPercent: 0, opacity: 1, duration: 1, display: 'flex' }
       )
         .fromTo(
           '#navigations_2',
-          { xPercent: 50, opacity: 0 },
+          { xPercent: 100, opacity: 0 },
           { xPercent: 0, opacity: 1, duration: 0.5, stagger: 0.05 },
           "-=0.8" // starts 0.5s before previous animation ends (overlap)
         );
@@ -200,12 +192,12 @@ function App() {
       tl.fromTo(
         mobileMenuRef.current,
         { xPercent: 0, opacity: 1 },
-        { xPercent: 50, opacity: 0, display: 'none', duration: 1 }
+        { xPercent: 100, opacity: 0, display: 'none', duration: 1 }
       );
       tl.fromTo(
         '#navigations_2',
         { xPercent: 0, opacity: 1 },
-        { xPercent: 50, opacity: 0, duration: 0.5, stagger: 0.05 },
+        { xPercent: 100, opacity: 0, duration: 0.5, stagger: 0.05 },
         "-=1.1"
       );
     }
@@ -226,28 +218,38 @@ function App() {
       <header className="w-full h-20 flex items-center fixed top-0 left-0 bg-slate-950 z-50">
         <nav className="w-full" role="navigation">
           {/* Desktop Navigation */}
-          <ul className="hidden md:flex justify-end gap-10 font-bold px-10 py-6 items-center w-full">
-            <li id="navigations-1" className="mr-auto text-3xl font-bold cursor-pointer bg-gradient-to-r from-purple-700 to-purple-500 bg-clip-text text-transparent">
+          <div className="hidden md:grid md:grid-cols-3 justify-items-center  gap-2 font-bold h-16 items-center w-full">
+            <div className="w-full text-center text-3xl bg-gradient-to-r from-purple-700 to-purple-500 bg-clip-text text-transparent font-bold cursor-pointer">
               <a href="#home" onClick={(e) => handleScroll(e, "#home")}>
                 Shoaib's Portfolio
               </a>
-            </li>
-            {navItems.map(({ label, path }) => (
-              <li key={label} id="navigations">
-                <a
-                  href={path}
-                  onClick={(e) => handleScroll(e, path)}
-                  className="text-purple-500"
-                >
-                  {label}
-                </a>
-              </li>
-            ))}
-          </ul>
+            </div>
+            <ul className="flex w-full h-full items-center rounded-full justify-evenly backdrop-blur-3xl bg-white/5">
+              {navItems.map(({ label, path }) => (
+                <li key={label} id="navigations">
+                  <a
+                    href={path}
+                    onClick={(e) => handleScroll(e, path)}
+                    className="text-purple-500"
+                  >
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="w-full text-center active:scale-95 hover:scale-105 transition-all duration-300">
+              <a
+                href="#contact"
+                onClick={(e) => handleScroll(e, "#contact")}
+                className="text-white bg-sky-600 rounded-lg shadow-lg py-2.5 px-6"
+              >
+                Let's Talk</a>
+            </div>
+          </div>
 
           {/* Mobile Navigation */}
-          <div className="md:hidden flex justify-between items-center px-8 py-5 backdrop-blur-2xl bg-white/5 rounded-full mx-4">
-            <span className="text-3xl font-bold bg-gradient-to-r from-purple-700 to-purple-500 bg-clip-text text-transparent">
+          <div className="md:hidden flex justify-between items-center px-8 py-5 backdrop-blur-2xl bg-white/5 rounded-full mx-4 z-50">
+            <span className="text-2xl font-bold bg-gradient-to-r from-purple-700 to-purple-500 bg-clip-text text-transparent">
               <a href="#home" onClick={(e) => handleScroll(e, "#home")}>
                 Shoaib's Portfolio
               </a>
@@ -273,7 +275,7 @@ function App() {
           <ul
             // id="navi"
             ref={mobileMenuRef}
-            className={`w-full h-screen absolute top-full left-0 backdrop-blur-lg px-12 bg-slate-950/5 hidden flex-col gap-8 font-bold py-6 text-slate-300 shadow-2xl md:hidden origin-top z-50`}
+            className={`w-full h-screen absolute top-0 left-0 backdrop-blur-lg px-12 bg-slate-950/5 hidden flex-col gap-8 font-bold py-28 text-slate-300 shadow-2xl md:hidden origin-top -z-50`}
           >
             {navItems.map(({ label, path }) => (
               <li id="navigations_2" key={label} className="rounded-lg hover:bg-purple-50 w-full font-bold text-xl">
@@ -283,11 +285,11 @@ function App() {
               </li>
             ))}
             <li className="py-8 flex justify-center">
-              <p className="rotate-270"><MdOutlineFileDownload size={25} color="red"/></p>
+              <p className="rotate-270"><MdOutlineFileDownload size={25} color="red" /></p>
               <a
-              className="text-2xl text-red-600"
-              href="#contact"
-              onClick={(e) => handleScroll(e, "#contact")}
+                className="text-2xl text-red-600"
+                href="#contact"
+                onClick={(e) => handleScroll(e, "#contact")}
               >Let's Taik</a>
             </li>
           </ul>
